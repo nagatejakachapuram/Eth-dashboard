@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: #4CAF50; }
+        input { margin-bottom: 10px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Ethereum Balance Dashboard</h1>
+    <form method="GET">
+        <input type="text" name="address" placeholder="Enter Ethereum Address" required>
+        <button type="submit">Get Balance</button>
+    </form>
+    {{ if .balance }}
+        <h2>Balance: {{ .balance }} wei</h2>
+    {{ end }}
+    {{ if .transactions }}
+        <h2>Transaction History:</h2>
+        <table>
+            <tr>
+                <th>Hash</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Value (Wei)</th>
+                <th>Timestamp</th>
+            </tr>
+            {{ range .transactions }}
+            <tr>
+                <td><a href="https://etherscan.io/tx/{{ .Hash }}">{{ .Hash }}</a></td>
+                <td>{{ .From }}</td>
+                <td>{{ .To }}</td>
+                <td>{{ .Value }}</td>
+                <td>{{ .Time }}</td>
+            </tr>
+            {{ end }}
+        </table>
+    {{ end }}
+</body>
+</html>
+
+
