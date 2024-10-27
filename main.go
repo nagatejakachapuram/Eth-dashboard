@@ -26,7 +26,7 @@ var ethClient *ethclient.Client
 func init() {
 	// Initialize Ethereum Client
 	var err error
-	ethClient, err = ethclient.Dial("https://mainnet.infura.io/v3/48b725421b1b4693975c19019dcaa8fd")
+	ethClient, err = ethclient.Dial("https://mainnet.infura.io/v3/Your infura ID")
 	if err != nil {
 		panic(err)
 	}
@@ -55,7 +55,7 @@ func GetBalance(address string) string {
 
 // GetTransactions retrieves the latest transactions for a given address from Etherscan
 func GetTransactions(address string) ([]Transaction, error) {
-	apiKey := "EZEYWNY8TZFDT4XTNVMRJFU857SXVYAY1P" // Replace with your Etherscan API Key
+	apiKey := "your api key" 
 	url := fmt.Sprintf("https://api.etherscan.io/api?module=account&action=txlist&address=%s&startblock=0&endblock=99999999&sort=desc&apikey=%s", address, apiKey)
 
 	resp, err := http.Get(url)
@@ -101,7 +101,6 @@ func DashboardHandler(c *gin.Context) {
 func main() {
 	router := gin.Default()
 
-	// Serve the dashboard
 	router.GET("/", DashboardHandler)
 
 	router.Run(":8080") // Start the server
